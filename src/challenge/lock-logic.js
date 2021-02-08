@@ -20,11 +20,21 @@ function changeDialValue (index, incrementBy) {
   // lockState.locked = false
   // or lockState.wheels[1] = 2
   // the lock will re-render itself when the value changes
-
+  lockState.locked=false;
+  lockState.wheels[index] = lockState.wheels[index]+incrementBy;
+  lockState.locked=true;
   // When the lock is set to match the secretCombo
   // call the redirect() function with your name
   // eg: redirect('larry-lobster')
   // the redirect function will only redirect if the lockState is unlocked
+  
+  //equals comparison from https://www.30secondsofcode.org/blog/s/javascript-array-comparison
+  const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+  if (equals(SECRET_COMBO, lockState.wheels)){
+    lockState.locked=false;
+    redirect('drewspooner')
+  }
 }
 
 // let our other modules find our functions
